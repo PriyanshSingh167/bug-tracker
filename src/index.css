@@ -7,11 +7,18 @@ html::-webkit-scrollbar {
   display: none;
 }
 
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+html,
 body {
   font-family: "Montserrat", sans-serif;
   background-color: #f2f4f8;
   margin: 0;
   box-sizing: border-box;
+  height: 100%;
 }
 
 a {
@@ -25,7 +32,58 @@ button {
   border: none;
 }
 
+li {
+  list-style: none;
+}
+
 /* Home page */
+
+/* @Navbar */
+
+.left-panel {
+  height: 100%;
+  width: 21%;
+  background-color: #fdeedc;
+}
+
+.nav-menu {
+  display: flex;
+  position: fixed;
+  top: 0px;
+  border-radius: 2px;
+}
+
+.nav-menu-items {
+  display: flex;
+  flex-direction: column;
+}
+.nav-text {
+  /* flex-direction: column; */
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 1px 0px 1px 0;
+  margin-left: 0;
+  list-style: none;
+  height: 60px;
+}
+.nav-text:hover {
+  background-color: #f7f6dc;
+}
+
+.circle-img {
+  border-radius: 50%;
+  border: 2px solid grey;
+  width: 40px;
+  height: 40px;
+}
+.insect {
+  position: absolute;
+  margin-left: 154px;
+  height: 50px;
+  width: 20px;
+  font-size: large;
+}
 
 /* Split the screen in half */
 .split {
@@ -349,7 +407,7 @@ button {
   }
 }
 
-.exploreHeading,
+/* .exploreHeading,
 .exploreCategoryHeading {
   font-weight: 700;
 }
@@ -860,4 +918,4 @@ button {
   margin-left: 1rem;
   font-size: 0.8rem;
   opacity: 0.75;
-}
+} */

@@ -1,129 +1,62 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
-import { db } from "../firebase.config";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
-import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
-import visibilityIcon from "../assets/svg/visibilityIcon.svg";
+import { useState, useEffect } from "react";
+import { getAuth } from "firebase/auth";
+import { useNavigate, Link } from "react-router-dom";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
 
+import Avatar from "../components/Avatar";
 function Home() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-  const { name, email, password } = formData;
-
+  const auth = getAuth();
   const navigate = useNavigate();
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.id]: e.target.value,
-    }));
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    setUser(auth.currentUser);
+  }, []);
+
+  const homeLink = () => {
+    navigate("/home");
   };
-  const onSubmit = async (e) => {
-    e.preventDefault();
 
-    try {
-      const auth = getAuth();
-
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      const user = userCredential.user;
-
-      const formDataCopy = { ...formData };
-      delete formDataCopy.password;
-      formDataCopy.timestamp = serverTimestamp();
-
-      await setDoc(doc(db, "users", user.uid), formDataCopy);
-
-      updateProfile(auth.currentUser, {
-        displayName: name,
-      });
-
-      navigate("/mark");
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <>
-      <div className="split left">
-        <h1 className="leftHeading">Bug Tracker</h1>
-        <p className="leftP">Manage Your bugs</p>
-      </div>
-      <div className="split right">
-        <>
-          <div className="pageContainer">
-            <header>
-              <p className="pageHeader">Welcome Back!</p>
-            </header>
+      <div className="left-panel">
+        <nav className="nav-menu">
+          {user ? (
+            <ul className="nav-menu-items">
+              <li className="nav-text insect">
+                <AiIcons.AiFillBug className="bug" onClick={homeLink} />
+              </li>
+              <li className="nav-text">{<Avatar />}</li>
+              <li className="nav-text">
+                <h4>Welcome, {user.displayName}</h4>
+              </li>
+              <li className="nav-text">
+                {<FaIcons.FaUserNinja />} <span>Profile</span>
+              </li>
+              <li className="nav-text">
+                {<FaIcons.FaProjectDiagram />} <span>Projects</span>
+              </li>
+              <li className="nav-text">
+                {<AiIcons.AiOutlineUserAdd />} <span>Help</span>
+              </li>
+              <li className="nav-text">
+                {<FaIcons.FaTicketAlt />} <span>My Tickets</span>
+              </li>
 
-            <form onSubmit={onSubmit}>
-              <input
-                type="text"
-                className="nameInput"
-                placeholder="Name"
-                id="name"
-                value={name}
-                onChange={onChange}
-              />
-              <input
-                type="email"
-                className="emailInput"
-                placeholder="Email"
-                id="email"
-                value={email}
-                onChange={onChange}
-              />
-
-              <div className="passwordInputDiv">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className="passwordInput"
-                  placeholder="Password"
-                  id="password"
-                  value={password}
-                  onChange={onChange}
-                />
-
-                <img
-                  src={visibilityIcon}
-                  alt="show password"
-                  className="showPassword"
-                  onClick={() => setShowPassword((prevState) => !prevState)}
-                />
-              </div>
-
-              <Link to="/forgot-password" className="forgotPasswordLink">
-                Forgot Password
+              <li className="nav-text">
+                {<AiIcons.AiOutlineLogout />} <span>Logout</span>
+              </li>
+            </ul>
+          ) : (
+            <>
+              <Link to="/">
+                <h1>Log In First</h1>
               </Link>
-
-              <div className="signUpBar">
-                <p className="signUpText">Sign Up</p>
-                <button className="signUpButton">
-                  <ArrowRightIcon fill="#ffffff" width="34px" height="34px" />
-                </button>
-              </div>
-            </form>
-
-            {/* Google OAuth */}
-
-            <Link to="/login" className="registerLink">
-              Sign In Instead
-            </Link>
-          </div>
-        </>
+            </>
+          )}
+        </nav>
       </div>
     </>
   );
