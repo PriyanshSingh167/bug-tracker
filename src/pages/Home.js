@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 
 import Avatar from "../components/Avatar";
 function Home() {
   const auth = getAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
 
@@ -15,9 +15,9 @@ function Home() {
     setUser(auth.currentUser);
   }, []);
 
-  const homeLink = () => {
-    navigate("/home");
-  };
+  // const homeLink = () => {
+  //   navigate("/home");
+  // };
 
   return (
     <>
@@ -25,12 +25,15 @@ function Home() {
         <nav className="nav-menu">
           {user ? (
             <ul className="nav-menu-items">
-              <li className="nav-text insect">
+              {/* <li className="nav-text insect">
                 <AiIcons.AiFillBug className="bug" onClick={homeLink} />
-              </li>
+              </li> */}
               <li className="nav-text">{<Avatar />}</li>
               <li className="nav-text">
-                <h4>Welcome, {user.displayName}</h4>
+                <h4>
+                  Welcome, <br />
+                  {user.displayName}
+                </h4>
               </li>
               <li className="nav-text">
                 {<FaIcons.FaUserNinja />} <span>Profile</span>
@@ -42,7 +45,7 @@ function Home() {
                 {<AiIcons.AiOutlineUserAdd />} <span>Help</span>
               </li>
               <li className="nav-text">
-                {<FaIcons.FaTicketAlt />} <span>My Tickets</span>
+                {<FaIcons.FaTicketAlt />} <span>Tickets</span>
               </li>
 
               <li className="nav-text">
