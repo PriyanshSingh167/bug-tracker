@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
+import ForgotPassword from "./pages/ForgotPassword";
 function App() {
   return (
     <>
@@ -23,6 +24,8 @@ function App() {
           <Route path="/home" element={<PrivateRoute />}>
             <Route path="/home" element={<Home />} />
           </Route>
+          {/* Forgot password */}
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </Router>
       <ToastContainer />

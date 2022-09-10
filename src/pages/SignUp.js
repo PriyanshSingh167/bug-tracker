@@ -9,6 +9,7 @@ import {
 import { db } from "../firebase.config";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
+import OAuth from "../components/OAuth";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
 
 function SignUp() {
@@ -105,10 +106,6 @@ function SignUp() {
                 />
               </div>
 
-              <Link to="/forgot-password" className="forgotPasswordLink">
-                Forgot Password
-              </Link>
-
               <div className="signUpBar">
                 <p className="signUpText">Sign Up</p>
                 <button className="signUpButton">
@@ -117,7 +114,8 @@ function SignUp() {
               </div>
             </form>
 
-            {/* Google OAuth */}
+            <h3 style={{ color: "orangered" }}>OR</h3>
+            <OAuth />
 
             <Link to="/login" className="registerLink">
               Sign In Instead
