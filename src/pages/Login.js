@@ -35,6 +35,7 @@ function Login() {
 
       if (userCredential.user) {
         navigate("/home");
+        console.log(auth?.currentUser?.members);
       }
     } catch (error) {
       toast.error("Bad User Credentials");
