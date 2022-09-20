@@ -38,7 +38,13 @@ li {
 
 /* Home page */
 
-/* @Navbar */
+.box-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* @ Leftt-part */
 
 .left-panel {
   height: 100%;
@@ -127,12 +133,36 @@ li {
   width: 40px;
   height: 40px;
 }
-.insect {
-  position: absolute;
-  margin-left: clamp(70px, 45%, 154px);
-  height: 50px;
-  width: 20px;
-  font-size: large;
+
+/* @ Right -Part */
+
+.right-panel {
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+}
+.main-header {
+  height: 16%;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  align-items: flex-start;
+}
+.bug-picture {
+  width: 12%;
+  background-color: #fff;
+  height: 100%;
+}
+.bug {
+  font-size: 80px;
+  padding-left: 3px;
+  margin-left: 3px;
+}
+.xHead {
+  width: 70%;
+  height: 100%;
+  padding-top: 2px;
+  margin-top: 3px;
 }
 
 /* Split the screen in half */

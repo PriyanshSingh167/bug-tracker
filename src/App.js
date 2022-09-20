@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./pages/ForgotPassword";
+import CreateProject from "./pages/CreateProject";
+import MyProjects from "./pages/MyProjects";
 function App() {
   return (
     <>
@@ -26,6 +28,8 @@ function App() {
           </Route>
           {/* Forgot password */}
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/create-project" element={<CreateProject />} />
+          <Route path="/my-project" element={<MyProjects />} />
         </Routes>
       </Router>
       <ToastContainer />

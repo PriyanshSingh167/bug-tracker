@@ -1,10 +1,11 @@
 import { getAuth } from "firebase/auth";
-import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-
+import Header from "../components/Header";
 import Avatar from "../components/Avatar";
+import CreateProject from "./CreateProject";
+
 function Home() {
   const auth = getAuth();
 
@@ -14,8 +15,12 @@ function Home() {
     navigate("/");
   };
 
+  const addProject = () => {
+    navigate("/create-project");
+  };
+
   return (
-    <>
+    <div className="box-container">
       <div className="left-panel">
         <nav className="nav-menu">
           <ul className="nav-menu-items">
@@ -50,7 +55,17 @@ function Home() {
           </ul>
         </nav>
       </div>
-    </>
+      <div className="right-panel">
+        <Header />
+        <div className="projects">
+          <div className="add-project">
+            <button onClick={addProject}>+Add</button>
+          </div>
+          <div className="view-projects">View Projects</div>
+          <div className="add-timeline">Set TimeLines</div>
+        </div>
+      </div>
+    </div>
   );
 }
 

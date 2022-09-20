@@ -42,6 +42,7 @@ function SignUp() {
       );
 
       const user = userCredential.user;
+      formData.access = "admin";
       const formDataCopy = { ...formData };
       delete formDataCopy.password;
       formDataCopy.timestamp = serverTimestamp();
@@ -53,6 +54,7 @@ function SignUp() {
       });
 
       navigate("/home");
+      console.log(formDataCopy);
     } catch (error) {
       toast.error("Something went wrong");
     }
