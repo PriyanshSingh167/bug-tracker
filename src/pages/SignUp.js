@@ -62,8 +62,12 @@ function SignUp() {
   return (
     <>
       <div className="split left">
-        <h1 className="leftHeading">Bug Tracker</h1>
-        <p className="leftP">Manage Your bugs</p>
+        <div className="pageContainer">
+          <h1 className="leftHeading">Bug Tracker</h1>
+          <header>
+            <p className="pageHeader">Manage Your Bugs 🪲</p>
+          </header>
+        </div>
       </div>
       <div className="split right">
         <>

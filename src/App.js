@@ -9,6 +9,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./pages/ForgotPassword";
 import CreateProject from "./pages/CreateProject";
 import MyProjects from "./pages/MyProjects";
+import Navbar from "./pages/Navbar";
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/create-project" element={<CreateProject />} />
           <Route path="/my-project" element={<MyProjects />} />
+          <Route path="/navbar" element={<Navbar />} />
         </Routes>
       </Router>
       <ToastContainer />

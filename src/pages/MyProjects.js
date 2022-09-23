@@ -4,6 +4,7 @@ import { db } from "../firebase.config";
 import { getAuth } from "firebase/auth";
 import { toast } from "react-toastify";
 import Spinner from "../components/Spinner";
+import ProjectItem from "../components/ProjectItem";
 
 const MyProjects = () => {
   const auth = getAuth();
@@ -52,7 +53,11 @@ const MyProjects = () => {
                 <>
                   {listings.data.projectNo === auth.currentUser.uid ? (
                     <>
-                      <p>{listings.data.name}</p>
+                      <ProjectItem
+                        listing={listings.data}
+                        id={listings.id}
+                        key={listings.id}
+                      />
                     </>
                   ) : (
                     <> </>

@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 //import uuid v4
 import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
-
+import { AiOutlinePlus } from "react-icons/ai";
 import { db } from "../firebase.config";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
@@ -30,24 +30,26 @@ const CreateProject = () => {
     e.preventDefault();
     try {
       const auth = getAuth();
+      const imageUrl = `https://source.unsplash.com/random/300x200?sig=${Math.random()}`;
       formData.timeStamp = serverTimestamp();
+      formData.imageUrl = imageUrl;
       formData.projectNo = auth.currentUser.uid;
       formData.projectId = unique_id;
       await setDoc(doc(db, "listings", unique_id), formData);
       navigate("/home");
     } catch (error) {
       toast.error("Somethin went wrong");
-      console.log(error);
     }
   };
   return (
     <>
       <div className="pageContainer">
         <header>
-          <p className="pageHader">Create Your Project</p>
+          <p className="pageHeader">Create Your Project</p>
         </header>
         <form onSubmit={onSubmit}>
           <input
+            className="nameInput"
             type="text"
             placeholder="Please Enter Project Name"
             value={name}
@@ -55,6 +57,7 @@ const CreateProject = () => {
             onChange={onChange}
           />
           <textarea
+            className="nameInput"
             placeholder="Description"
             id="description"
             cols="30"
@@ -63,31 +66,35 @@ const CreateProject = () => {
             onChange={onChange}
           ></textarea>
           <select
+            className="nameInput"
             id="type"
             value={type}
             onChange={onChange}
             placeholder="Select Project Type"
           >
+            <option value="Type">Select Project Type</option>
             <option value="Web">Web</option>
             <option value="Android">Andriod</option>
             <option value="ios">ios</option>
             <option value="other">other</option>
           </select>
           <select
+            className="nameInput"
             id="members"
             value={members}
             placeholder="No. of Team Members"
             onChange={onChange}
           >
+            <option value="Members">Select Team Members</option>
             <option value="1">Single</option>
             <option value="2-5">2-5</option>
             <option value="5-10">5-10</option>
             <option value="10+">10+</option>
           </select>
           <div className="signUpBar">
-            <p className="signUpText">Sign Up</p>
+            <p className="signUpText">Create Project</p>
             <button className="signUpButton">
-              <ArrowRightIcon fill="#ffffff" width="34px" height="34px" />
+              <AiOutlinePlus fill="#ffffff" width="34px" height="34px" />
             </button>
           </div>
         </form>
