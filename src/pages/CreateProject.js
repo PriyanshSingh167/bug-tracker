@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { getAuth } from "firebase/auth";
-//import uuid v4
-import { v4 as uuid } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { db } from "../firebase.config";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  serverTimestamp,
+  addDoc,
+  collection,
+} from "firebase/firestore";
 import { toast } from "react-toastify";
 const CreateProject = () => {
-  const unique_id = uuid();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -34,9 +37,9 @@ const CreateProject = () => {
       formData.timeStamp = serverTimestamp();
       formData.imageUrl = imageUrl;
       formData.projectNo = auth.currentUser.uid;
-      formData.projectId = unique_id;
-      await setDoc(doc(db, "listings", unique_id), formData);
-      navigate("/home");
+      const dbRef = collection(db, "listings");
+      await addDoc(dbRef, formData);
+      navigate("/my-project");
     } catch (error) {
       toast.error("Somethin went wrong");
     }

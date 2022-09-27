@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
-import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  limit,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "../firebase.config";
 import { getAuth } from "firebase/auth";
 import { toast } from "react-toastify";
@@ -38,6 +46,17 @@ const MyProjects = () => {
     fetchListings();
   }, []);
 
+  const onDelete = async (listingId) => {
+    if (window.confirm("Are you sure you want to delete?")) {
+      await deleteDoc(doc(db, "listings", listingId));
+      const updatedListings = listings.filter(
+        (listing) => listing.id !== listingId
+      );
+      setListings(updatedListings);
+      toast.success("Successfully deleted listing");
+    }
+  };
+
   return (
     <div className="category">
       <header>
@@ -57,6 +76,7 @@ const MyProjects = () => {
                         listing={listings.data}
                         id={listings.id}
                         key={listings.id}
+                        onDelete={() => onDelete(listings.id)}
                       />
                     </>
                   ) : (

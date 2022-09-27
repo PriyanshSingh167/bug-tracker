@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ReactComponent as DeleteIcon } from "../assets/svg/deleteIcon.svg";
-
-const ProjectItem = ({ listing, id }) => {
+import { AiFillCalendar } from "react-icons/ai";
+const ProjectItem = ({ listing, id, onDelete }) => {
   return (
     <li className="categoryListing">
       <Link to={`/my-project/${id}`} className="categoryListingLink">
@@ -15,7 +15,18 @@ const ProjectItem = ({ listing, id }) => {
           <p className="categoryListingLocation">{listing.description}</p>
           <p className="categoryListingPrice">{listing.type}</p>
         </div>
+        <div className="categoryListingInfoDiv">
+          <AiFillCalendar />
+          <p className="categoryListingInfoText">{listing.timeStamp.Date}</p>
+        </div>
       </Link>
+      {onDelete && (
+        <DeleteIcon
+          className="removeIcon"
+          fill="rgb(231, 76,60)"
+          onClick={() => onDelete(listing.id)}
+        />
+      )}
     </li>
   );
 };

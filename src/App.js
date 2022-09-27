@@ -10,6 +10,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import CreateProject from "./pages/CreateProject";
 import MyProjects from "./pages/MyProjects";
 import Navbar from "./pages/Navbar";
+import Project from "./pages/Project";
 function App() {
   return (
     <>
@@ -32,6 +33,7 @@ function App() {
           <Route path="/create-project" element={<CreateProject />} />
           <Route path="/my-project" element={<MyProjects />} />
           <Route path="/navbar" element={<Navbar />} />
+          <Route path="/my-project/:projectId" element={<Project />} />
         </Routes>
       </Router>
       <ToastContainer />
