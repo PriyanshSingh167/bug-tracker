@@ -11,6 +11,8 @@ import {
 import { db } from "../firebase.config";
 import { getAuth } from "firebase/auth";
 import { toast } from "react-toastify";
+import TopWrapper from "../components/TopWrapper";
+import LeftWrapper from "../components/LeftWrapper";
 import Spinner from "../components/Spinner";
 import ProjectItem from "../components/ProjectItem";
 
@@ -56,40 +58,49 @@ const MyProjects = () => {
       toast.success("Successfully deleted listing");
     }
   };
-
   return (
-    <div className="category">
-      <header>
-        <p className="pageHeader">My Projects</p>
-      </header>
-      {loading ? (
-        <Spinner />
-      ) : listings && listings.length > 0 ? (
-        <>
-          <main>
-            <ul className="categoryListings">
-              {listings.map((listings) => (
-                <>
-                  {listings.data.projectNo === auth.currentUser.uid ? (
+    <div className="wrapper">
+      <div className="top-wrapper">
+        <TopWrapper />
+      </div>
+      <div className="left-wrapper">
+        <LeftWrapper />
+      </div>
+      <div className="main-wrapper">
+        <div className="category">
+          <header>
+            <p className="pageHeader projectHeader">My Projects</p>
+          </header>
+          {loading ? (
+            <Spinner />
+          ) : listings && listings.length > 0 ? (
+            <>
+              <main>
+                <ul className="categoryListings">
+                  {listings.map((listings) => (
                     <>
-                      <ProjectItem
-                        listing={listings.data}
-                        id={listings.id}
-                        key={listings.id}
-                        onDelete={() => onDelete(listings.id)}
-                      />
+                      {listings.data.projectNo === auth.currentUser.uid ? (
+                        <>
+                          <ProjectItem
+                            listing={listings.data}
+                            id={listings.id}
+                            key={listings.id}
+                            onDelete={() => onDelete(listings.id)}
+                          />
+                        </>
+                      ) : (
+                        <> </>
+                      )}
                     </>
-                  ) : (
-                    <> </>
-                  )}
-                </>
-              ))}
-            </ul>
-          </main>
-        </>
-      ) : (
-        <p>No Projects to show</p>
-      )}
+                  ))}
+                </ul>
+              </main>
+            </>
+          ) : (
+            <p>No Projects to show</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

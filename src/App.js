@@ -9,7 +9,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import ForgotPassword from "./pages/ForgotPassword";
 import CreateProject from "./pages/CreateProject";
 import MyProjects from "./pages/MyProjects";
-import Navbar from "./pages/Navbar";
+
 import Project from "./pages/Project";
 function App() {
   return (
@@ -31,8 +31,8 @@ function App() {
           {/* Forgot password */}
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/create-project" element={<CreateProject />} />
-          <Route path="/my-project" element={<MyProjects />} />
-          <Route path="/navbar" element={<Navbar />} />
+          <Route path="/my-projects" element={<MyProjects />} />
+
           <Route path="/my-project/:projectId" element={<Project />} />
         </Routes>
       </Router>
